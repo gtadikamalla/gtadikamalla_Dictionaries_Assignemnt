@@ -127,7 +127,13 @@ def valid_input(prompt,pattern=None):
 def customerAccess():
     while True:
         print(menu_list)
-        order=input('Enter your quantity and dish name (eg: 30 burger):')
+        order=input('Enter your quantity and dish name (eg: 30 burger) or Give B to back main menu:')
+
+        if order.lower()=='b':
+            print("Returning to the main menu...")
+            break
+        
+        
         if not re.match(r'^[0-9]+\s[A-Za-z]+$', order):
             print("Invalid format! Please enter the order in the format 'Quantity Dish name' (e.g., 30 burger).")
             continue
