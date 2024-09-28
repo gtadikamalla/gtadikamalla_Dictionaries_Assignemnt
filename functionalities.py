@@ -128,6 +128,9 @@ def customerAccess():
     while True:
         print(menu_list)
         order=input('Enter your quantity and dish name (eg: 30 burger):')
+        if not re.match(r'^[0-9]+\s[A-Za-z]+$', order):
+            print("Invalid format! Please enter the order in the format 'Quantity Dish name' (e.g., 30 burger).")
+            continue
         quantity, dish_name=order.split()
         quantity=int(quantity)
         for item in menu_list:
