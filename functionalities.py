@@ -139,6 +139,7 @@ def customerAccess():
             continue
         quantity, dish_name=order.split()
         quantity=int(quantity)
+        item_found=False
         for item in menu_list:
             if dish_name.upper() in item['dish'].upper():
                 item_found=True
