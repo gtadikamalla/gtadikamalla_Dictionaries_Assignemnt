@@ -132,13 +132,16 @@ def customerAccess():
         quantity=int(quantity)
         for item in menu_list:
             if dish_name.upper() in item['dish'].upper():
+                item_found=True
                 if quantity<=item['stock']:
-                    print(f'Your order {quantity}{dish_name} is Success')
+                    print(f'Your order {quantity}  {dish_name} is Success')
+                    item['stock']= item['stock']-quantity
                 else:
-                    print(f'{dish_name} is Out of stock')
+                    print(f'{dish_name} is out of stock')
                 break
-            else:
-                print(f'{dish_name} is not in menu list.')
+        
+        if not item_found:
+            print(f'{dish_name} is not in menu list.')
             
 
 
