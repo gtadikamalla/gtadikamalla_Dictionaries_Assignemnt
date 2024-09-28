@@ -126,8 +126,10 @@ def valid_input(prompt,pattern=None):
 
 def customerAccess():
     while True:
-        order=input('Enter your quantity and dish name:')
         print(menu_list)
+        order=input('Enter your quantity and dish name (eg: 30 burger):')
+        quantity, dish_name=order.split()
+        
 
 
 convertItems()
