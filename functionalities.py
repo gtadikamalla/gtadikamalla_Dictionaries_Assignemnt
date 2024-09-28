@@ -129,7 +129,17 @@ def customerAccess():
         print(menu_list)
         order=input('Enter your quantity and dish name (eg: 30 burger):')
         quantity, dish_name=order.split()
-        
+        quantity=int(quantity)
+        for item in menu_list:
+            if dish_name.upper() in item['dish'].upper():
+                if quantity<=item['stock']:
+                    print(f'Your order {quantity}{dish_name} is Success')
+                else:
+                    print(f'{dish_name} is Out of stock')
+                break
+            else:
+                print(f'{dish_name} is not in menu list.')
+            
 
 
 convertItems()
