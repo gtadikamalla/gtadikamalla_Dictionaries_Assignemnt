@@ -126,12 +126,19 @@ def managerAccess():
                 print('----------------------------------------')
                 print('Invalid input. Please enter valid input.')
             
+            
             print('-------------------------------------------------------------')
             continue_action = input("Do you want to perform another action as a manager (Y/N)? ")
-            if continue_action not in 'yY':
+            if continue_action in 'nN':
                 print('-----------------------')
                 print("Exiting Manager Access.")
                 break
+            elif continue_action not in 'yY':
+                print('--------------------------')
+                print('Invalid input.Enter (Y/N).')
+                break
+                    
+           
 
         elif a in 'nN':
             print('--------------')
