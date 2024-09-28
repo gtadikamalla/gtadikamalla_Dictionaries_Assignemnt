@@ -23,11 +23,11 @@ def convertItems():
 
 def stock():
     for item in menu_list:
-    # Check if the item ID starts with 'A', 'S', 'E', or 'T' (indicating it's a non-drink item)
+    
         if item['id'][0] not in ['D']:
             item['stock'] = random.randint(25, 50)
 
-# Print the updated menu list with stock values assigned
+
     #print(menu_list)
 
 
@@ -40,7 +40,8 @@ def managerAccess():
             print('A for Add an item')
             print('R for Remove an item')
             print('C for change price')
-            choice=input('Enter A or R or C:')
+            print('D for decription change')
+            choice=input('Enter A or R or C or D:')
             if not choice:
                 print('Invalid input. Please enter valid input.')
             elif choice in 'Aa':
@@ -59,12 +60,28 @@ def managerAccess():
                     stock()
 
             elif choice in 'Rr':
-                id=input('Enter id to remove:')
-                for items in menu_list:
-                    if id==items['id']:
-                        menu_list.remove(items)
-                        print(f'{id} is removed from menu.')
-                    
+                item_id = input('Enter id to remove:')
+                if any(item['id'] == item_id for item in menu_list):
+                    for item in menu_list:
+                        if item['id'] == item_id:
+                            menu_list.remove(item)
+                            break
+                    print(f'{item_id} is removed from menu.')
+                else:
+                    print(f'{item_id} Item ID is not in the menu list.')
+
+            elif choice in 'dD':
+                item_id = input('Enter id for dish name change:')
+                if any(item['id'] == item_id for item in menu_list):
+                    dish=input('Enter the dish name:')
+                    for item in menu_list:
+                        if item['id'] == item_id:
+                            item['dish']=dish
+                            break
+                    print(f'{dish} is updated to {item_id} menu.')
+                else:
+                    print(f'{item_id} Item ID is not in the menu list.')
+       
 
             elif choice in 'cC':
                 item_id = input('Enter id to change price:')
@@ -130,6 +147,7 @@ while True:
         managerAccess()
     elif access in 'cC':
         customerAccess()
+    
     else:
         print('-----------------------------------------')
         print('Invalid input. Please enter valid input.')
