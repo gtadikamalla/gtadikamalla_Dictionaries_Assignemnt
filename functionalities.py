@@ -65,7 +65,7 @@ def managerAccess():
                     dish=valid_input('Enter a dish name:', dish_pattern)
                     print('----------------------------------------')
                     price=valid_input('Enter price of an item:', price_pattern)
-                    new_item = {'id': id, 'dish': dish, 'price': price}
+                    new_item = {'id': id, 'dish': dish.upper(), 'price': price}
                     menu_list.append(new_item)
                     print('----------------------------------------')
                     print(new_item,'is added to menu.')
