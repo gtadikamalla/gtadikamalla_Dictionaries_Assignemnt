@@ -26,6 +26,8 @@ def stock():
     
         if item['id'][0] not in ['D']:
             item['stock'] = random.randint(25, 50)
+        else:
+            item['stock']='infinity'
 
 
     #print(menu_list)
@@ -68,6 +70,8 @@ def managerAccess():
                     print('----------------------------------------')
                     print(new_item,'is added to menu.')
                     stock()
+                    print('----------------------------------------')
+                    print(menu_list)
 
             elif choice in 'Rr':
 
@@ -80,8 +84,12 @@ def managerAccess():
                             menu_list.remove(item)
                             break
                     print('--------------------------------')
+                    print(menu_list)
+                    print('--------------------------------')
                     print(f'{item_id} is removed from menu.')
                 else:
+                    print('-------------------------------------------')
+                    print(menu_list)
                     print('-------------------------------------------')
                     print(f'{item_id} Item ID is not in the menu list.')
 
@@ -179,7 +187,7 @@ def customerAccess():
             break
         
         
-        if not re.match(r'^[0-9]+\s[A-Za-z]+$', order):
+        if not re.match(r'^[0-9]+\s[A-Za-z_]+$', order):
             print('-------------------------------------------------------------------------------')
             print("Invalid format! Please enter the order in the format 'Quantity Dish name' (e.g., 30 burger).")
             continue
@@ -189,15 +197,21 @@ def customerAccess():
         for item in menu_list:
             if dish_name.upper() in item['dish'].upper():
                 item_found=True
-                if quantity<=item['stock']:
-                    print('-----------------------------------------------')
-                    print(f'Your order {quantity}  {dish_name} is Success.')
-                    item['stock']= item['stock']-quantity
+                if isinstance(item.get('stock'), int):
+                    if quantity<=item['stock']:
+                        print('-----------------------------------------------')
+                        print(f'Your order {quantity}  {dish_name} is Success.')
+                        item['stock']= item['stock']-quantity
+                    else:
+                        remainingStock=item['stock']
+                        print('----------------------------')
+                        print(f'{dish_name} is out of stock. {remainingStock} {dish_name} left.')
+                    break
                 else:
-                    print('----------------------------')
-                    print(f'{dish_name} is out of stock')
+                    item_found=True
+                    print(f'Your order {quantity}  {dish_name} is Success.')
                 break
-        
+
         if not item_found:
             print('---------------------------------')
             print(f'{dish_name} is not in menu list.')
